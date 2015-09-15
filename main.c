@@ -45,9 +45,28 @@ int main() {
 // reads in the graph from stdin and 
 // stores it in a graph_t struct
 graph_t stdin_to_graph() {
+	FILE *graph;
+	graph = fopen("./tests/in/test_1.txt","r");	
     // stub (delete when you implement this function)
+	int numVert;
+	fscanf(graph,"%d",&numVert);
+	int numEdge;
+	fscanf(graph,"%d",&numEdge);
+	vertex_t *vertices;
+	for(int i = 0; i < 1; i++){
+		int id;
+		char* name = ;
+	//	char* color;
+		fscanf(graph,"%d",&id);
+		fscanf(graph,"%s",&name);
+		printf("%s",name);
+		//fscanf(graph,"%s",&color);
+		
+		//fputs(name,stdout);
+//vertex_t newVert = new_vertex(
+	}
+	fclose(graph); 
     return NULL;
-    /* TODO: Your code here */
 }
 
 // writes the result of our computations

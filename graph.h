@@ -19,8 +19,11 @@
  * A name
  * A color
  */
-typedef struct vertex {
-    /* TODO: Your code here */
+typedef struct vertex{
+	int  id;
+	char* name;
+	char* color;
+	
 } *vertex_t;
 
 /* Each edge has:
@@ -31,6 +34,10 @@ typedef struct vertex {
  */
 typedef struct edge {
     /* TODO: Your code here */
+	int id;
+	char* name;
+	vertex_t src;
+	vertex_t dst;
 } *edge_t;
 
 /* Each graph has:
@@ -43,7 +50,8 @@ typedef struct edge {
  * etc.
  */
 typedef struct graph {
-    /* TODO: Your code here */
+  	vertex_t *vertices;
+	edge_t *edges;
 } *graph_t;
 
 // C functions that are defined in graph.c
