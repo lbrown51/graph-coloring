@@ -31,11 +31,13 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "main.h"
 #include "graph.h"
 
 int main() {
     // read in the graph from stdin
+    
     graph_t graph = stdin_to_graph();
     // do the necessary computations, and
     // write the result to stdout
@@ -46,34 +48,63 @@ int main() {
 // stores it in a graph_t struct
 graph_t stdin_to_graph() {
 	FILE *graph;
+	
 	graph = fopen("./tests/in/test_1.txt","r");	
-    // stub (delete when you implement this function)
+	
 	int numVert;
 	fscanf(graph,"%d",&numVert);
 	int numEdge;
 	fscanf(graph,"%d",&numEdge);
-	vertex_t *vertices;
-	for(int i = 0; i < 1; i++){
+
+	vertex_t vertices[numVert];
+	edge_t edges[numEdge];	
+
+	for(int i = 0; i < numVert; i++){
 		int id;
-		char* name = ;
-	//	char* color;
+		char* name = malloc(sizeof(char)*20);	
+		char* color = malloc(sizeof(char)*10);
 		fscanf(graph,"%d",&id);
-		fscanf(graph,"%s",&name);
-		printf("%s",name);
-		//fscanf(graph,"%s",&color);
-		
-		//fputs(name,stdout);
-//vertex_t newVert = new_vertex(
+		fscanf(graph,"%s",name);
+		fscanf(graph,"%s",color);
+				
+		vertices[id] = new_vertex(id,name,color);
+		free(name);
+		free(color);
 	}
+	
+	
+	for(int i=0; i<numEdge; i++){
+		int id;
+		fscanf(graph,"%d",&id);
+
+		char* name = malloc(sizeof(char)*31);
+		char* throw = malloc(sizeof(char)*7);
+		fscanf(graph,"%s %s",throw,name);
+
+		int IdSrc;
+		int IdDst;
+		fscanf(graph,"%d",&IdSrc);
+		fscanf(graph,"%d",&IdDst);
+		
+		vertex_t src = vertices[IdSrc];
+		vertex_t dst = vertices[IdDst];
+
+		edges[i] = new_edge(id,name,src,dst);
+		
+	} 
 	fclose(graph); 
-    return NULL;
+	
+	//I'm choosing to build the whole graph even though technically I could probably sort it and return in this one function I might end up changing this
+	graph_t this = new_graph(vertices, numVert, edges, numEdge);
+    	return this;
 }
 
 // writes the result of our computations
 // to stdout
 void graph_to_stdout(graph_t graph) {
     // get a list of bad edges in the graph
-    get_bad_edges(graph);
+    edge_t* badEdges = get_bad_edges(graph);
+//	print_bad_edges(badEdges);
     // get the number of colors in the graph
     int colors = num_colors(graph);
     // falsely assume that the graph is colored correctly, and print out a YES message

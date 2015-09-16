@@ -22,8 +22,7 @@
 typedef struct vertex{
 	int  id;
 	char* name;
-	char* color;
-	
+	char* color;	
 } *vertex_t;
 
 /* Each edge has:
@@ -51,13 +50,15 @@ typedef struct edge {
  */
 typedef struct graph {
   	vertex_t *vertices;
+	int numVert;
 	edge_t *edges;
+	int numEdge;
 } *graph_t;
 
 // C functions that are defined in graph.c
 vertex_t new_vertex(int id, char *name, char *color);
 edge_t new_edge(int id, char *name, vertex_t src, vertex_t dst);
-graph_t new_graph(vertex_t *vertices, edge_t *edges);
+graph_t new_graph(vertex_t *vertices, int numVert, edge_t *edges, int numEdge);
 void print_vertex(vertex_t vertex);
 void print_edge(edge_t edge);
 void print_graph(graph_t graph);
